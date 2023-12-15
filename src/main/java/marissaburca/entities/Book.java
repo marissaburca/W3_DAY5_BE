@@ -39,8 +39,7 @@ public class Book extends Catalog{
         this.genre = genre;
     }
 
-    //TOSTRING
-
+    //TO_STRING
     @Override
     public String toString () {
         return "Book author :" + authorname  + "; Genre=" + genre ;

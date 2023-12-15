@@ -17,8 +17,8 @@ public class Catalog {
     @Column(name="total_of_pages")
     private int totalPages;
 
-    //CONSTRUCTORS
 
+    //CONSTRUCTORS
     public Catalog ( String title, int productionYear, int totalPages ) {
         this.title = title;
         this.productionYear = productionYear;
@@ -26,8 +26,8 @@ public class Catalog {
     }
     public Catalog(){};
 
-    //GETTER
 
+    //GETTER
     public UUID getIsbnCode () {
         return isbnCode;
     }
@@ -46,8 +46,6 @@ public class Catalog {
 
 
     //SETTER
-
-
     public void setTitle ( String title ) {
         this.title = title;
     }
@@ -60,8 +58,8 @@ public class Catalog {
         this.totalPages = totalPages;
     }
 
-    //TOSTRING
 
+    //TO_STRING
     @Override
     public String toString () {
         return "Catalog has code: " + isbnCode + "; Title: " + title + "; Year of production: " + productionYear + "; Number of pages: " + totalPages;

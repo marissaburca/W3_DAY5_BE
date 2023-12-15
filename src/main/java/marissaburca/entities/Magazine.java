@@ -18,21 +18,18 @@ public class Magazine extends Catalog {
 
 
     //GETTER
-
     public Periodicity getPeriodicity () {
         return periodicity;
     }
 
 
     //SETTER
-
     public void setPeriodicity ( Periodicity periodicity ) {
         this.periodicity = periodicity;
     }
 
 
-    //TOSTRING
-
+    //TO_STRING
     @Override
     public String toString () {
         return "Magazine's periodicity: " + periodicity;
