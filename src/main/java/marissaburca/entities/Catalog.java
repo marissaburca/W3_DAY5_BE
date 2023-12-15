@@ -8,8 +8,9 @@ import java.util.UUID;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type_of_item")
-@NamedQuery(name="findByYear", query ="SELECT e FROM Catalog e WHERE e.productionYear =:productionYear")
+@NamedQuery(name="findByYear", query ="SELECT e FROM Catalog e WHERE e.publicationYear =:publicationYear")
 @NamedQuery(name="findByAuthor", query ="SELECT b FROM Book b WHERE b.authorName =:authorName")
+@NamedQuery(name = "findByTitle", query = "SELECT e FROM Catalog e WHERE LOWER(e.title) LIKE LOWER(CONCAT('%', :partialTitle, '%'))")
 public class Catalog {
     @Id
     @Column(name ="isbn_code")
@@ -47,7 +48,7 @@ public class Catalog {
         return title;
     }
 
-    public int getProductionYear () {
+    public int getPublicationYear () {
         return publicationYear
                 ;
     }
@@ -62,11 +63,8 @@ public class Catalog {
         this.title = title;
     }
 
-    public void setProductionYear ( int publicationYear
-    ) {
-        this.publicationYear
-                = publicationYear
-        ;
+    public void setPublicationYear ( int publicationYear ) {
+        this.publicationYear = publicationYear;
     }
 
     public void setTotalPages ( int totalPages ) {
@@ -77,7 +75,7 @@ public class Catalog {
     //TO_STRING
     @Override
     public String toString () {
-        return "Catalog has code: " + isbnCode + "; Title: " + title + "; Year of publication: " + publicationYear
+        return "Item has code: " + isbnCode + "; Title: " + title + "; Year of publication: " + publicationYear
                 + "; Number of pages: " + totalPages;
     }
 }

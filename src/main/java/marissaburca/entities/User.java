@@ -16,7 +16,7 @@ public class User {
     @Column(name="date_of_birth")
     private LocalDate birthday;
     @Id
-    @Enumerated
+    @GeneratedValue
     @Column(name="card_number")
     private long id;
     @OneToMany(mappedBy = "user")

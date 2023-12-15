@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Table(name="loans")
 public class Loan {
     @Id
-    @Enumerated
+    @GeneratedValue
     private long id;
     @ManyToOne
     @JoinColumn(name="loaned_to")

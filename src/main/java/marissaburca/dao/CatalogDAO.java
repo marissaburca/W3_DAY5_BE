@@ -25,13 +25,13 @@ public class CatalogDAO {
     }
 
     //*********************** FIND BY ISBN ************************
-    public Catalog findByCode( UUID id) {
-        return em.find(Catalog.class, id);
+    public Catalog findByCode( UUID uuid) {
+        return em.find(Catalog.class, uuid);
     }
 
     //*************************** DELETE **************************
-    public void findByCodeAndDelete(UUID id){
-        Catalog found = this.findByCode(id);
+    public void findByCodeAndDelete(UUID uuid){
+        Catalog found = this.findByCode(uuid);
         if(found != null){
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
@@ -44,14 +44,20 @@ public class CatalogDAO {
     }
     //*********************** FIND BY YEAR ************************
     public List<Catalog> getElementsByPublicationYear(int publicationYear){
-        TypedQuery<Catalog> getElements = em.createQuery("findByYear",Catalog.class);
+        TypedQuery<Catalog> getElements = em.createNamedQuery("findByYear",Catalog.class);
         getElements.setParameter("publicationYear", publicationYear);
         return getElements.getResultList();
     }
     //********************** FIND BY AUTHOR ***********************
     public List<Book> getElementsByAuthor(String author){
-        TypedQuery<Book> getElements = em.createQuery("findByAuthor", Book.class);
+        TypedQuery<Book> getElements = em.createNamedQuery("findByAuthor", Book.class);
         getElements.setParameter("authorName", author);
+        return getElements.getResultList();
+    }
+    //********************** FIND BY TITLE ***********************
+    public List<Catalog> getElementsByTitle(String partialTitle) {
+        TypedQuery<Catalog> getElements = em.createNamedQuery("findByTitle", Catalog.class);
+        getElements.setParameter("partialTitle", "%" + partialTitle + "%");
         return getElements.getResultList();
     }
 }

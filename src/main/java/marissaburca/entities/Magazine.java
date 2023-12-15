@@ -2,14 +2,13 @@ package marissaburca.entities;
 
 import marissaburca.enums.Periodicity;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity
 @DiscriminatorValue("magazine")
 public class Magazine extends Catalog {
     @Column(name="periodicity")
+    @Enumerated(EnumType.STRING)
     private Periodicity periodicity;
 
 
@@ -34,8 +33,10 @@ public class Magazine extends Catalog {
 
 
     //TO_STRING
+
+
     @Override
     public String toString () {
-        return "Magazine's periodicity: " + periodicity;
+        return "Magazine: " + this.getTitle() + "; publication: "+ this.getPublicationYear() +"; periodicity: " + periodicity ;
     }
 }
