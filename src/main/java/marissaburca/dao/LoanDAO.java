@@ -1,8 +1,12 @@
 package marissaburca.dao;
 
+import marissaburca.entities.Catalog;
 import marissaburca.entities.Loan;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import java.time.LocalDate;
+import java.util.List;
 
 public class LoanDAO {
     private final EntityManager em; //permette interazione con database
@@ -17,7 +21,7 @@ public class LoanDAO {
         transaction.begin();
         em.persist(loan);
         transaction.commit();
-        System.out.println( "Loan " + loan.getId() + " successfully added to Archive");
+        System.out.println( "Loan for " + loan.getUser() + " successfully added to Archive");
     }
 
     //*********************** FIND BY ID **************************
@@ -37,6 +41,17 @@ public class LoanDAO {
         }else {
             System.out.println( "Loan not found");
         }
+    }
+    //********************** FIND ACTIVE LOANS USER **************************
+    public List<Catalog> getElementsInLoan( long id ){
+        TypedQuery<Catalog> getLoans = em.createNamedQuery("itemsInLoan",Catalog.class);
+        getLoans.setParameter("userId",id);
+        return getLoans.getResultList();
+    }
+
+    public List<Loan> getNotReturned(){
+        TypedQuery<Loan> getLoans = em.createNamedQuery("notReturned", Loan.class);
+        return getLoans.getResultList();
     }
 }
 

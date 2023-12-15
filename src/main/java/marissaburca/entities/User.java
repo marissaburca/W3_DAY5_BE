@@ -65,6 +65,6 @@ public class User {
     //TO_STRING
     @Override
     public String toString () {
-        return "User: " + name +  surname +  "; Date of birth: " + birthday + "; Card n°: " + id ;
+        return "User: " + name +" "+  surname +  "; Date of birth: " + birthday + "; Card n°: " + id ;
     }
 }

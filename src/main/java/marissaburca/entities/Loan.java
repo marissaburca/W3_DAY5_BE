@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="loans")
+@NamedQuery(name="itemsInLoan", query ="SELECT l.item FROM Loan l WHERE l.user.id = :userId")
+@NamedQuery(name="notReturned", query ="SELECT l FROM Loan l WHERE l.ends < CURRENT_DATE AND l.returned IS NULL")
 public class Loan {
     @Id
     @GeneratedValue
@@ -19,7 +21,7 @@ public class Loan {
     private LocalDate starts;
     @Column(name="loan_ends_on")
     private LocalDate ends;
-    @Column(name="item_returned_on")
+    @Column(name="item_returned_on", nullable = true)
     private LocalDate returned;
 
     //CONSTRUCTORS
