@@ -9,9 +9,11 @@ public class Loan {
     @Id
     @Enumerated
     private long id;
-    @Column(name="loaned_to")
+    @ManyToOne
+    @JoinColumn(name="loaned_to")
     private User user;
-    @Column(name="loaned_item")
+    @ManyToOne
+    @JoinColumn(name="loaned_item")
     private Catalog item;
     @Column(name="loan_started_on")
     private LocalDate starts;

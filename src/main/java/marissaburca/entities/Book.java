@@ -3,17 +3,21 @@ package marissaburca.entities;
 import marissaburca.enums.Genre;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("book")
 public class Book extends Catalog{
     @Column(name="author")
-    private String authorname;
+    private String authorName;
     private Genre genre;
 
     //CONSTRUCTORS
 
-    public Book ( String title, int productionYear, int totalPages, String authorname, Genre genre ) {
+    public Book ( String title, int productionYear, int totalPages, String authorName, Genre genre ) {
         super(title, productionYear, totalPages);
-        this.authorname = authorname;
+        this.authorName = authorName;
         this.genre = genre;
     }
 
@@ -22,7 +26,7 @@ public class Book extends Catalog{
 
     //GETTER
     public String getAuthorname () {
-        return authorname;
+        return authorName;
     }
 
     public Genre getGenre () {
@@ -31,8 +35,8 @@ public class Book extends Catalog{
 
 
     //SETTER
-    public void setAuthorname ( String authorname ) {
-        this.authorname = authorname;
+    public void setAuthorname ( String authorName ) {
+        this.authorName = authorName;
     }
 
     public void setGenre ( Genre genre ) {
@@ -42,6 +46,6 @@ public class Book extends Catalog{
     //TO_STRING
     @Override
     public String toString () {
-        return "Book author :" + authorname  + "; Genre=" + genre ;
+        return "Book author :" + authorName  + "; Genre=" + genre ;
     }
 }

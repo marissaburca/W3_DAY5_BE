@@ -3,6 +3,8 @@ package marissaburca.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="user")
@@ -17,6 +19,8 @@ public class User {
     @Enumerated
     @Column(name="card_number")
     private long id;
+    @OneToMany(mappedBy = "user")
+    private List<Loan> loans = new ArrayList<>();
 
     //CONSTRUCTORS
     public User ( String name, String surname, LocalDate birthday ) {

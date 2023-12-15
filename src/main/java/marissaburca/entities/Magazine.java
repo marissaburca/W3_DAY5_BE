@@ -3,7 +3,11 @@ package marissaburca.entities;
 import marissaburca.enums.Periodicity;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("magazine")
 public class Magazine extends Catalog {
     @Column(name="periodicity")
     private Periodicity periodicity;

@@ -1,29 +1,40 @@
 package marissaburca.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name ="Catalog")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type_of_item")
+@NamedQuery(name="findByYear", query ="SELECT e FROM Catalog e WHERE e.productionYear =:productionYear")
+@NamedQuery(name="findByAuthor", query ="SELECT b FROM Book b WHERE b.authorName =:authorName")
 public class Catalog {
     @Id
     @Column(name ="isbn_code")
     private UUID isbnCode;
     @Column(name="title")
     private String title;
-    @Column(name="production_year")
-    private int productionYear;
+    @Column(name="publication_year")
+    private int publicationYear;
     @Column(name="total_of_pages")
     private int totalPages;
+    @OneToMany(mappedBy = "item")
+    private List<Loan> loans = new ArrayList<>();
 
 
     //CONSTRUCTORS
-    public Catalog ( String title, int productionYear, int totalPages ) {
+    public Catalog ( String title, int publicationYear
+            , int totalPages ) {
+        this.isbnCode = UUID.randomUUID();
         this.title = title;
-        this.productionYear = productionYear;
+        this.publicationYear
+                = publicationYear
+        ;
         this.totalPages = totalPages;
     }
+
     public Catalog(){};
 
 
@@ -37,7 +48,8 @@ public class Catalog {
     }
 
     public int getProductionYear () {
-        return productionYear;
+        return publicationYear
+                ;
     }
 
     public int getTotalPages () {
@@ -50,8 +62,11 @@ public class Catalog {
         this.title = title;
     }
 
-    public void setProductionYear ( int productionYear ) {
-        this.productionYear = productionYear;
+    public void setProductionYear ( int publicationYear
+    ) {
+        this.publicationYear
+                = publicationYear
+        ;
     }
 
     public void setTotalPages ( int totalPages ) {
@@ -62,6 +77,7 @@ public class Catalog {
     //TO_STRING
     @Override
     public String toString () {
-        return "Catalog has code: " + isbnCode + "; Title: " + title + "; Year of production: " + productionYear + "; Number of pages: " + totalPages;
+        return "Catalog has code: " + isbnCode + "; Title: " + title + "; Year of publication: " + publicationYear
+                + "; Number of pages: " + totalPages;
     }
 }
